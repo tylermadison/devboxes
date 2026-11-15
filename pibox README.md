@@ -2,11 +2,11 @@
 
 Pi coding agent box · README
 
-# An agent that never asks, in a box that *doesn't let it out*.
+# An agent that never asks, in a box that *sets the limits*.
 
-pibox runs the [Pi coding agent](https://pi.dev) against any project in a locked-down container. It brings your own Pi setup (`settings.json`, `models.json`, `AGENTS.md`, extensions, skills, prompts, themes) and git identity. Pi runs tool calls without asking, and its project-trust prompt doesn't limit what tools can reach, so the box sets the limits instead.
+pibox runs the [Pi coding agent](https://pi.dev) against any project in a locked-down container. It brings your own Pi setup (`settings.json`, `models.json`, `AGENTS.md`, extensions, skills, prompts, themes) and git identity. Pi runs tool calls without asking, and its project-trust prompt doesn't limit what tools can reach, so the box sets the limits instead. Outbound traffic is open by default; set `PIBOX_FIREWALL=on` to limit it to the allowlist.
 
-default-deny egressmulti-provider allowlistno telemetryread-only root fsno capabilitiesauth.json never shared
+opt-in egress allowlistmulti-provider allowlistno telemetryread-only root fsno capabilitiesauth.json never shared
 
 your machine
 
@@ -26,7 +26,7 @@ pibox · node
 - `caps · sudo`none
 - `$ pi`
 
-egress gate
+egress gate (with `PIBOX_FIREWALL=on`; open by default)
 
 - `anthropic · openai`allow
 - `gemini · openrouter`allow
@@ -100,7 +100,7 @@ Options
 
 ## Opt-ins widen the box, *one* at a time.
 
-Every option is an environment variable. Put a permanent allowlist at `~/.config/pibox/allowlist.txt`.
+Every option is an environment variable. `PIBOX_FIREWALL=on` turns on the egress allowlist; it is off by default. Put a permanent allowlist at `~/.config/pibox/allowlist.txt`.
 
 | Variable | Default | Effect |
 | --- | --- | --- |
