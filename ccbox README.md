@@ -4,9 +4,9 @@ Claude Code box · README
 
 # Your Claude setup, in a *sealed* box.
 
-ccbox runs Claude Code against any project in a locked-down container. It brings your `CLAUDE.md`, settings, agents, commands, skills and git identity, but it can only write to the project you launched it from and can only reach the network hosts you allow.
+ccbox runs Claude Code against any project in a locked-down container. It brings your `CLAUDE.md`, settings, agents, commands, skills and git identity, but it can only write to the project you launched it from. Outbound traffic is open by default; set `CCBOX_FIREWALL=on` to limit it to the hosts you allow.
 
-default-deny egressread-only root fsno capabilitiesno sudohost config copied, never shared rw
+opt-in egress allowlistread-only root fsno capabilitiesno sudohost config copied, never shared rw
 
 your machine
 
@@ -26,7 +26,7 @@ ccbox · node
 - `caps · sudo`none
 - `$ claude --dangerously-skip-…`
 
-egress gate
+egress gate (with `CCBOX_FIREWALL=on`; open by default)
 
 - `api.anthropic.com`allow
 - `registry.npmjs.org`allow
@@ -92,7 +92,7 @@ Options
 
 ## Opt-ins widen the box, *one* at a time.
 
-Every option is an environment variable. To replace the built-in allowlist permanently, put your own at `~/.config/ccbox/allowlist.txt`.
+Every option is an environment variable. `CCBOX_FIREWALL=on` turns on the egress allowlist; it is off by default. To replace the built-in allowlist permanently, put your own at `~/.config/ccbox/allowlist.txt`.
 
 | Variable | Default | Effect |
 | --- | --- | --- |

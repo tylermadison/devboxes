@@ -33,6 +33,6 @@ The launcher runs on the host. It builds a `docker run` command. The container r
 
 ## Things to know
 
-- **Firewall default is open.** The launcher passes `CCBOX_FIREWALL=${CCBOX_FIREWALL:-off}` (pibox: `PIBOX_FIREWALL`). The egress allowlist is therefore not enforced unless the user sets the variable to `on`. The `ccbox README.md` text describes default-deny egress. Treat that claim as unverified until the default changes.
+- **Firewall default is open.** The launcher passes `CCBOX_FIREWALL=${CCBOX_FIREWALL:-off}` (pibox: `PIBOX_FIREWALL`). The egress allowlist is therefore not enforced unless the user sets the variable to `on`. The READMEs say so: egress filtering is opt-in. If the default ever changes to `on`, update `ccbox README.md`, `pibox README.md` and the READMEs inside the zips together.
 - `ccbox` and `pibox` are near-copies. `entrypoint.sh` is identical apart from names. Changes to the firewall, user-init, or launcher usually need the same change in both. Keep them in sync.
 - The Dockerfile pins the Node base image (ccbox: `node:22`, pibox: `node:24`). Those versions differ on purpose or by accident. Check before aligning them.
